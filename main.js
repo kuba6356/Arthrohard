@@ -122,7 +122,7 @@ function renderDetails(element){
     divTopContainer.appendChild(exit)
     let divName = document.createElement("div")
     divName.classList.add("details-text")
-    divName.textContent = `Nazwa: ${json[element.dataset.page].data[element.dataset.id-1].text}`
+    divName.textContent = `Nazwa: ${json[element.dataset.page].data[(element.dataset.id-1)%document.getElementById("products-selection").textContent].text}`
     divDetailsContainer.appendChild(divName)
     let divValue = document.createElement("div")
     divValue.classList.add("details-text")
@@ -140,7 +140,7 @@ let productContent = document.getElementsByClassName("product-content")[0]
 //sprawdza czy użytkownik doszedł do końca strony i generuję dodatkowe "produkty" z api'a
 document.addEventListener('scroll', () =>{
     if(productContent.childElementCount >= document.getElementById("products-selection").textContent){
-        if(document.documentElement.scrollHeight === Math.round(window.pageYOffset + window.innerHeight)){
+        if((document.documentElement.scrollHeight -1) < Math.round(window.pageYOffset + window.innerHeight)){
             renderFromApi(newestData.currentPage+1, document.getElementById("products-selection").textContent)
         }
     }

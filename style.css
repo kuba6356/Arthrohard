@@ -791,6 +791,7 @@ text-align: center;
     right: -4%;
     top: 50%;
 }
+
 @media (max-width:767px){
     .grey-random-vector{
         display: none;

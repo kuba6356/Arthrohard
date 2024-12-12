@@ -1,47 +1,34 @@
 
-//funkcja sprawdzająca jaki div jest po 1/4 ekranu
-function isElementVisible(element) { 
-    const elementTop = element.offsetTop *2;
-    const elementBottom = elementTop  
-        + element.offsetHeight; 
-    const viewportTop = window.pageYOffset*2.2; 
-    const viewportBottom = viewportTop  
-        + window.innerHeight; 
+//funkcja sprawdzająca jaki div jest po 1/4 ekranu    
+const isElementVisible = new IntersectionObserver((entries) =>{
+    entries.forEach((entry) =>{
+        if(entry.isIntersecting){
+            return true
+        }
+    })
+})
 
-    return ( 
-        elementBottom > viewportTop && 
-        elementTop < viewportBottom
-    ); 
-} 
 //dodaje klasę "current-section" do elementu który obecnie znajduję się po 1/4 ekranu
 window.addEventListener("scroll", () =>{
     const info = document.getElementById("Info")
     const composition = document.getElementById("composition")
     const products = document.getElementById("products-content")
-    const headerButtons = document.getElementsByClassName("menu-element-pc")
+    const headerButtons = document.querySelector(".menu-element-pc")
     const promoContent = document.getElementById("promo-content")
-    if(isElementVisible(promoContent)){
-    for(let x = 0; x< headerButtons.length; x++){
-        headerButtons[x].classList.remove("current-section")
+    if(isElementVisible.observe(promoContent)){
+        headerButtons.classList.remove("current-section")
     }
-    }
-    else if(isElementVisible(info)){
-        for(let x = 0; x< headerButtons.length; x++){
-            headerButtons[x].classList.remove("current-section")
+    else if(isElementVisible.observe(info)){
+        headerButtons.classList.remove("current-section")
+        headerButtons.classList.add("current-section")
         }
-        headerButtons[0].classList.add("current-section")
+    else if(isElementVisible.observe(composition)){
+        headerButtons.classList.remove("current-section")
+        headerButtons.classList.add("current-section")
         }
-    else if(isElementVisible(composition)){
-        for(let x = 0; x< headerButtons.length; x++){
-            headerButtons[x].classList.remove("current-section")
-        }
-        headerButtons[1].classList.add("current-section")
-        }
-    else if(isElementVisible(products)){
-        for(let x = 0; x< headerButtons.length; x++){
-            headerButtons[x].classList.remove("current-section")
-        }
-        headerButtons[2].classList.add("current-section")
+    else if(isElementVisible.observe(products)){
+        headerButtons.classList.remove("current-section")
+        headerButtons.classList.add("current-section")
     }
 })
 
@@ -53,30 +40,29 @@ function myFunction() {
   
   window.onclick = function(event) {
     if (!event.target.matches('#products-selection')) {
-      const dropdowns = document.getElementsByClassName("dropdown-content");
-      for (i = 0; i < dropdowns.length; i++) {
-        const openDropdown = dropdowns[i];
+      const dropdowns = document.querySelector(".dropdown-content");
+        const openDropdown = dropdowns;
         if((event.target.matches('.option') && event.target.textContent != document.getElementById("products-selection").textContent)){
             document.getElementById("products-selection").textContent = event.target.textContent
             removeFromApi()
             renderFromApi(1, event.target.textContent)
         }
         if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
+            openDropdown.classList.remove('show');
       }
     }
   }
 
-let json = []
+const json = []
 let newestData
 async function renderFromApi(pageNumber, pageSize) {
+    try{
     let data = await fetch(`https://brandstestowy.smallhost.pl/api/random?pageNumber=${pageNumber}&pageSize=${pageSize}`)
     data = await data.json()
     json.push(data)
     newestData = data
 
-    const productContent = document.getElementsByClassName("product-content")[0]
+    const productContent = document.querySelector(".product-content")
     for(let x = 0; x < pageSize; x++){
         let apiIMG = document.createElement("img")
         apiIMG.setAttribute("src", json[[data.currentPage][0]-1].data[x].id)
@@ -90,14 +76,18 @@ async function renderFromApi(pageNumber, pageSize) {
         }
         productContent.appendChild(apiIMG)
     }
-    }
+} catch(err){
+    console.log(`Erorr: ${err}`)
+}
+}
+
 renderFromApi(1,10)
 
 function removeFromApi(){
-    while(document.getElementsByClassName("product-content")[0].childElementCount != 0){
-        document.getElementsByClassName("product-content")[0].children[0].remove()
+    while(document.querySelector(".product-content").childElementCount != 0){
+        document.querySelector(".product-content").children[0].remove()
     }
-    json = []
+    json.length = 0
 }
 function renderDetails(element){
     const body = document.querySelector("body")
@@ -132,9 +122,9 @@ function renderDetails(element){
 }
 function exitDetails(){
     document.querySelector("body").classList.remove("stop-scroll")
-    document.getElementsByClassName("darken-bg")[0].remove()
+    document.querySelector(".darken-bg").remove()
 }
-let productContent = document.getElementsByClassName("product-content")[0]
+let productContent = document.querySelector(".product-content")
 
 
 //sprawdza czy użytkownik doszedł do końca strony i generuję dodatkowe "produkty" z api'a
@@ -147,11 +137,11 @@ document.addEventListener('scroll', () =>{
 })
 
 //generuje menu po klinkieciu w przycisk w wersji mobilnej
-const mobileButton = document.getElementsByClassName("mobile-button")[0]
+const mobileButton = document.querySelector(".mobile-button")
 const order = mobileButton.parentElement
 order.addEventListener("click", () =>{
     if(!order.classList.contains("absolute")){
-        document.getElementsByClassName("selection-arrow")[0].classList.add("static")
+        document.querySelector(".selection-arrow").classList.add("static")
         const body = document.querySelector("body")
         const whitenDiv = document.createElement("div")
         whitenDiv.classList.add("whiten-bg")
@@ -199,11 +189,11 @@ order.addEventListener("click", () =>{
         })
     }
     else{
-        document.getElementsByClassName("whiten-bg")[0].remove()
-        document.getElementsByClassName("menu-div")[0].remove()
+        document.querySelector(".whiten-bg").remove()
+        document.querySelector(".menu-div").remove()
         document.querySelector("body").classList.remove("stop-scroll")
         order.classList.remove("absolute")
-        document.getElementsByClassName("selection-arrow")[0].classList.remove("static")
+        document.querySelector(".selection-arrow").classList.remove("static")
     }
 })
 

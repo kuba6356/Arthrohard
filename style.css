@@ -39,6 +39,7 @@ a{
 .logo{
     width: 239px;
     min-height: 29px;
+    background-image: url(assets/Logo.png);
 }
 .menu-top-pc{
     display: flex;
@@ -535,7 +536,11 @@ text-align: center;
     .details-text{
         text-align: start;
     }
-    
+    .how-wroks-ol{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
   }
   @media (max-width: 600px ) {
      

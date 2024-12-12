@@ -87,7 +87,7 @@ function removeFromApi(){
     while(document.querySelector(".product-content").childElementCount != 0){
         document.querySelector(".product-content").children[0].remove()
     }
-    json = []
+    json.length = 0
 }
 function renderDetails(element){
     const body = document.querySelector("body")

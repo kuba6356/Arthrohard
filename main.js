@@ -56,6 +56,7 @@ function myFunction() {
 const json = []
 let newestData
 async function renderFromApi(pageNumber, pageSize) {
+    try{
     let data = await fetch(`https://brandstestowy.smallhost.pl/api/random?pageNumber=${pageNumber}&pageSize=${pageSize}`)
     data = await data.json()
     json.push(data)
@@ -75,7 +76,11 @@ async function renderFromApi(pageNumber, pageSize) {
         }
         productContent.appendChild(apiIMG)
     }
-    }
+} catch(err){
+    console.log(`Erorr: ${err}`)
+}
+}
+
 renderFromApi(1,10)
 
 function removeFromApi(){

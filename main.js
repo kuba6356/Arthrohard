@@ -53,7 +53,7 @@ function myFunction() {
     }
   }
 
-let json = []
+const json = []
 let newestData
 async function renderFromApi(pageNumber, pageSize) {
     let data = await fetch(`https://brandstestowy.smallhost.pl/api/random?pageNumber=${pageNumber}&pageSize=${pageSize}`)

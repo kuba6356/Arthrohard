@@ -39,7 +39,6 @@ a{
 .logo{
     width: 239px;
     min-height: 29px;
-    background-image: url(assets/Logo.png);
 }
 .menu-top-pc{
     display: flex;
@@ -65,15 +64,15 @@ a{
 }
 #promo-content{
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 111.44px;
+    gap: calc(5% + 18px);
     padding: 0 5%;
     position: relative;
     z-index: 1;
 
 }
 .promo-img{
+    width: calc(25% + 300px);
     background-image: url(assets/design-vector.svg), url(assets/design-vector.svg) ;
     background-repeat: no-repeat, no-repeat;
     background-position: 5% 80%, 95% 50%;
@@ -90,7 +89,7 @@ a{
 }
 .logo-text{
     color: rgba(173, 72, 68, 1);
-    font-size: min(10vw, 120px);
+    font-size: calc(5vw + 24px);
     margin: 0;
 }
 .promo-info{
@@ -102,7 +101,7 @@ a{
     gap: 20px;
 }
 .promo-text-big{
-    font-size: 48px;
+    font-size: calc(2vw + 10px);
     text-wrap: wrap;
 
 }
@@ -135,6 +134,7 @@ text-align: center;
     max-width: fit-content;
     align-self: center;
     margin: 0;
+    z-index: 1;
 }
 #Info{
     display: flex;
@@ -159,6 +159,7 @@ text-align: center;
 
 }
 .info-content{
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -388,21 +389,8 @@ text-align: center;
   .mobile{
     display: none;
   }
-  
-@media (max-width: 1765px){
-    .promo-info{
-        align-items: center;
-    }
-    .promo-content-wrapper{
-        align-items: center;
-    }
-    .composition-container-wrapper {
-        flex-direction: column;
-        align-items: center;
-    } 
-}
 
-@media (max-width: 600px) {
+@media (max-width: 767px) {
     .mobile{
         display: block;
       }    
@@ -423,6 +411,8 @@ text-align: center;
     }
     #promo-content{
         gap: 30px;
+        flex-direction: column;
+        align-items: center;
     }
     .promo-img{padding: 0;}
     .header{
@@ -440,7 +430,7 @@ text-align: center;
         padding-bottom: 0;
     }
     #Info{
-        gap: 60px;
+        gap: 30px;
         padding: 0 15px;
     }
     .logo-text{display: none;}
@@ -455,6 +445,7 @@ text-align: center;
     }
     .info-content{
         gap: 60px;
+        flex-direction: column;
     }
     .intake{
         align-items: center;
@@ -485,8 +476,8 @@ text-align: center;
         min-width: 260px;
     }
     .product-pic{
-        width: 105px;
-        min-height: 105px;
+        width: calc(30vw + 25px);
+        min-height: calc(30vw + 25px);
         font-size: 31px;
     }
     .product-content{
@@ -504,7 +495,6 @@ text-align: center;
         max-width: 135px;
     }
     .how-works-container{
-        padding: 0 15px;
         display: flex;
         align-items: center;
         min-height: 40px;
@@ -540,10 +530,9 @@ text-align: center;
         display: flex;
         flex-direction: column;
         gap: 30px;
+        padding: 0;
+        max-width: 100vw;
     }
-  }
-  @media (max-width: 600px ) {
-     
   }
 
 .whiten-bg{
@@ -557,7 +546,7 @@ text-align: center;
     justify-content: center;
     align-items: center;
 }
-@media (max-width: 600px) {
+@media (max-width: 767px) {
     .order{
         order: 1;
         min-height: 24px;
@@ -567,6 +556,7 @@ text-align: center;
         display: flex;
         justify-content: center;
         align-items: center ;
+        margin-right: 3%;
     }
 }
 .order:active{
@@ -575,10 +565,10 @@ text-align: center;
 }
  .menu-div{
     min-height: 210px;
-    min-width: 290px;
+    min-width: 90%;
     background-color: rgba(173, 72, 68, 1);
     position: fixed;
-    margin: 0 15px ;
+    margin: 0 5% ;
     right: 0;
     display: flex;
     flex-direction: column;
@@ -589,7 +579,7 @@ text-align: center;
   .absolute{
     position: absolute;
     top: 15px;
-    right: 18px;
+    right: 3%;
   }
   .static {
     position: static;
@@ -664,7 +654,7 @@ text-align: center;
 .greyVector{
     display: none;
 }
-@media (max-width: 600px) {
+@media (max-width: 767px) {
     .sad-dog{
         min-height: 223.94px;
         max-width: 426.66px;
@@ -778,10 +768,12 @@ text-align: center;
     position: absolute;
     background-image: url(assets/design-vector-gray.svg);
     transform: rotate(-64.14deg);
-    height: 812.1px;
+    height: calc(40vw + 44px);
     width: 318.92px;
     right: -6%;
     top: 42%;
+    background-repeat: no-repeat;
+    z-index: 2;
 }
 .grey-random-vector{
     position: absolute;
@@ -799,7 +791,7 @@ text-align: center;
     right: -4%;
     top: 50%;
 }
-@media (max-width:600px){
+@media (max-width:767px){
     .grey-random-vector{
         display: none;
     }
@@ -808,6 +800,21 @@ text-align: center;
     }
     .grey-vector-pic{
         display: none;
+    }
+    .promo-info{
+        align-items: center;
+    }
+    .composition-group-container{
+        padding: 0;
+    }
+    .composition-container-wrapper{
+        flex-direction: column;
+    }
+    .promo-text-small{
+        width: 60%;
+    }
+    .promo-text-big{
+        width: 60%;
     }
 }
 .order{

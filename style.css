@@ -89,9 +89,8 @@ a{
     text-align: start;
 }
 .logo-text{
-    color: rgba(173, 72, 68, 1);
-    font-size: 6vw;
     margin: 0;
+    font-size: 5vw;
 }
 .promo-info{
     max-width: 654px;

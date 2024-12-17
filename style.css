@@ -66,7 +66,6 @@ a{
     display: flex;
     justify-content: center;
     gap: calc(5% + 18px);
-    padding: 0 5%;
     position: relative;
     z-index: 1;
 
@@ -86,6 +85,7 @@ a{
     flex-wrap: wrap;
     gap: 33px;
     z-index: 3;
+    max-width: 100%;
 }
 .logo-text{
     color: rgba(173, 72, 68, 1);
@@ -118,6 +118,7 @@ font-size: 20px;
 font-weight: 700;
 padding: 0;
 text-align: center;
+cursor: pointer;
 }
 .button:hover{
     transform: scale(1.1);
@@ -278,6 +279,7 @@ text-align: center;
     align-items: center;
     font-size: 31px;
     margin: 7.5px 0;
+    cursor:pointer;
 }
 .selection-wrapper{
     font-size: 20px;
@@ -377,6 +379,7 @@ text-align: center;
   }
   .exit-details{
     font-size: 31px;
+    cursor: pointer;
 
   }
   .details-top-div{
@@ -400,6 +403,7 @@ text-align: center;
     }
     .mobile-button{
         display: flex;
+        cursor: pointer;
 
       }
     .menu-top-pc{
@@ -409,7 +413,7 @@ text-align: center;
         width: 94px;
         min-height: 12px
     }
-    #promo-content{
+    .hero-container{
         gap: 30px;
         flex-direction: column;
         align-items: center;
@@ -589,6 +593,7 @@ text-align: center;
     color: white;
     min-width: 100%;
     padding: 0 0 20px 0;
+    
   }
   .sad-dog{
     order: 2;
@@ -820,4 +825,13 @@ text-align: center;
 }
 .order{
     order: 1;
+}
+.hero-container{
+    display: flex;
+    padding: 0 5%;
+    justify-content: space-around;
+    width: 100%;
+}
+.option{
+    cursor: pointer;
 }

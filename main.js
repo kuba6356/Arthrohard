@@ -1,11 +1,36 @@
 
-//funkcja sprawdzająca jaki div jest po 1/4 ekranu    
+//dodaje klasę "current-section" do elementu który obecnie znajduję się na 40% ekranu
 const isElementVisible = new IntersectionObserver((entries) =>{
+    const headerButtons = document.querySelectorAll(".menu-element-pc")
     entries.forEach((entry) =>{
         if(entry.isIntersecting){
-            return true
+            if(entry.target == document.getElementById("promo-content")){
+                headerButtons.forEach((headerButton) =>{
+                    headerButton.classList.remove("current-section")
+                })
+            }
+            else if(entry.target == document.getElementById("Info")){
+                headerButtons.forEach((headerButton) =>{
+                    headerButton.classList.remove("current-section")
+                })
+                headerButtons[0].classList.add("current-section")
+            }
+            else if(entry.target == document.getElementById("composition")){
+                headerButtons.forEach((headerButton) =>{
+                    headerButton.classList.remove("current-section")
+                })
+                headerButtons[1].classList.add("current-section")
+            }
+            else if(entry.target == document.getElementById("products-content")){
+                headerButtons.forEach((headerButton) =>{
+                    headerButton.classList.remove("current-section")
+                })
+                headerButtons[2].classList.add("current-section")
+            }
         }
     })
+}, {
+    threshold: 0.4,
 })
 
 //dodaje klasę "current-section" do elementu który obecnie znajduję się po 1/4 ekranu
@@ -13,23 +38,11 @@ window.addEventListener("scroll", () =>{
     const info = document.getElementById("Info")
     const composition = document.getElementById("composition")
     const products = document.getElementById("products-content")
-    const headerButtons = document.querySelector(".menu-element-pc")
     const promoContent = document.getElementById("promo-content")
-    if(isElementVisible.observe(promoContent)){
-        headerButtons.classList.remove("current-section")
-    }
-    else if(isElementVisible.observe(info)){
-        headerButtons.classList.remove("current-section")
-        headerButtons.classList.add("current-section")
-        }
-    else if(isElementVisible.observe(composition)){
-        headerButtons.classList.remove("current-section")
-        headerButtons.classList.add("current-section")
-        }
-    else if(isElementVisible.observe(products)){
-        headerButtons.classList.remove("current-section")
-        headerButtons.classList.add("current-section")
-    }
+    isElementVisible.observe(info)
+    isElementVisible.observe(composition)
+    isElementVisible.observe(products)
+    isElementVisible.observe(promoContent)
 })
 
 function myFunction() {
@@ -73,11 +86,15 @@ async function renderFromApi(pageNumber, pageSize) {
         apiIMG.setAttribute("data-Page", `${[[data.currentPage][0]-1]}`)
         apiIMG.classList.add("product-pic")
         if(x == json[[data.currentPage][0]-1].data.length-1){
+            if(document.querySelector(".last-item") != null){
+                document.querySelector(".last-item").classList.remove("last-item")
+            }
+            apiIMG.classList.add("last-item")
         }
         productContent.appendChild(apiIMG)
     }
 } catch(err){
-    console.log(`Erorr: ${err}`)
+    console.error(`Erorr: ${err}`)
 }
 }
 
@@ -119,6 +136,11 @@ function renderDetails(element){
     //zmienić w przypadku api'a który zwraca wartość produktu.
     divValue.textContent = `Wartość: ${json[element.dataset.page].data[element.dataset.id-1]}`
     divDetailsContainer.appendChild(divValue)
+    darkenDiv.addEventListener("click", (e) =>{
+        if(e.target === darkenDiv){
+            exitDetails()
+        }
+    })
 }
 function exitDetails(){
     document.querySelector("body").classList.remove("stop-scroll")
@@ -127,12 +149,19 @@ function exitDetails(){
 let productContent = document.querySelector(".product-content")
 
 
-//sprawdza czy użytkownik doszedł do końca strony i generuję dodatkowe "produkty" z api'a
-document.addEventListener('scroll', () =>{
-    if(productContent.childElementCount >= document.getElementById("products-selection").textContent){
-        if((document.documentElement.scrollHeight -1) < Math.round(window.pageYOffset + window.innerHeight)){
+//sprawdza czy użytkownik doszedł do ostatniego produktu i generuję dodatkowe "produkty" z api'a
+const lastElementVisible = new IntersectionObserver((entries) =>{
+    entries.forEach((entry) =>{
+        if(entry.isIntersecting){
             renderFromApi(newestData.currentPage+1, document.getElementById("products-selection").textContent)
         }
+    })
+},{
+    threshold: 1,
+})
+document.addEventListener('scroll', () =>{
+    if(document.querySelector(".last-item") != null){
+        lastElementVisible.observe(document.querySelector(".last-item"))
     }
 })
 

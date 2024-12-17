@@ -86,10 +86,11 @@ a{
     gap: 33px;
     z-index: 3;
     max-width: 100%;
+    text-align: start;
 }
 .logo-text{
     color: rgba(173, 72, 68, 1);
-    font-size: calc(5vw + 24px);
+    font-size: 6vw;
     margin: 0;
 }
 .promo-info{
@@ -101,12 +102,14 @@ a{
     gap: 20px;
 }
 .promo-text-big{
-    font-size: calc(2vw + 10px);
+    font-size: 3vw;
     text-wrap: wrap;
+    max-width: 80%;
 
 }
 .promo-text-small{
     text-wrap: wrap;
+    max-width: 70%;
 }
 .button{
 background-color: rgba(173, 72, 68, 1);
@@ -221,7 +224,6 @@ cursor: pointer;
 }
 #composition{
     background-color: rgba(255, 255, 255, 1);
-    padding: 0 5%;
     display: flex;
     flex-direction: column;
 
@@ -463,9 +465,7 @@ cursor: pointer;
         align-items: center;
         position: relative;
     }
-    .composition-pic-wrapper{
-        order: 1;
-    }
+
     #products-content{
         padding: 50px 25px 104px 35px;
         gap: 30px;
@@ -810,9 +810,6 @@ cursor: pointer;
     .promo-info{
         align-items: center;
     }
-    .composition-group-container{
-        padding: 0;
-    }
     .composition-container-wrapper{
         flex-direction: column;
     }
@@ -822,6 +819,7 @@ cursor: pointer;
     .promo-text-big{
         width: 60%;
     }
+
 }
 .order{
     order: 1;
@@ -831,7 +829,25 @@ cursor: pointer;
     padding: 0 5%;
     justify-content: space-around;
     width: 100%;
+    gap: 5%;
 }
 .option{
     cursor: pointer;
+}
+.div-container{
+    display: flex;
+}
+@media (max-width:1250px){
+    .div-container{
+        flex-wrap: wrap;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .composition-pic-wrapper{
+        order: 1;
+    }
+}
+.composition-group-container{
+    padding: 0;
 }

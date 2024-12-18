@@ -846,6 +846,9 @@ cursor: pointer;
     .composition-pic-wrapper{
         order: 1;
     }
+    .logo-text{
+        font-size: 3vw;   
+    }
 }
 .composition-group-container{
     padding: 0;

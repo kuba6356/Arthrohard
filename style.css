@@ -71,7 +71,7 @@ a{
 
 }
 .promo-img{
-    width: calc(25% + 300px);
+    width: calc(35% + 102px);
     background-image: url(assets/design-vector.svg), url(assets/design-vector.svg) ;
     background-repeat: no-repeat, no-repeat;
     background-position: 5% 80%, 95% 50%;
@@ -90,7 +90,7 @@ a{
 }
 .logo-text{
     margin: 0;
-    font-size: 5vw;
+    font-size: 4.5vw;
 }
 .promo-info{
     max-width: 654px;
@@ -845,9 +845,6 @@ cursor: pointer;
     }
     .composition-pic-wrapper{
         order: 1;
-    }
-    .logo-text{
-        font-size: 3vw;   
     }
 }
 .composition-group-container{
